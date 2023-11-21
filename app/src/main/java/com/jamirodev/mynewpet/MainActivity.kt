@@ -35,6 +35,6 @@ class MainActivity : ComponentActivity() {
             composable(Routes.USER_INPUT_SCREEN) {
                 UserInputScreen()
             }
-        }
+        }   
     }
 }

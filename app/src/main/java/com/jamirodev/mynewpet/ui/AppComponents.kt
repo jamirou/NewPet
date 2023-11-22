@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -102,6 +103,7 @@ fun TextFieldComponent(
 fun AnimalCard(
     image: Int, selected: Boolean, animalSelected: (animalName: String) -> Unit
 ) {
+    val localFocusManager = LocalFocusManager.current
     Card(
         modifier = Modifier
             .padding(24.dp)
@@ -125,16 +127,25 @@ fun AnimalCard(
                     .clickable {
                         val animalName = if (image == R.drawable.feliz) "Cat" else "Dog"
                         animalSelected(animalName)
+                        localFocusManager.clearFocus()
                     }, painter = painterResource(id = image), contentDescription = "Animal image"
             )
         }
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun AnimalCardPreview() {
-//    AnimalCard()
-//}
-
+@Composable
+fun ButtonComponent(
+    goToDetailScreen: () -> Unit
+) {
+    Button(
+        modifier = Modifier.fillMaxWidth(),
+        onClick = {
+            goToDetailScreen()
+        }) {
+        TextComponent(
+            textValue = "Ver detalles", textSize = 18.sp, colorValue = Color.White
+        )
+    }
+}
 

@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.jamirodev.mynewpet.R
 import com.jamirodev.mynewpet.data.UserDataUiEvents
 import com.jamirodev.mynewpet.ui.AnimalCard
+import com.jamirodev.mynewpet.ui.ButtonComponent
 import com.jamirodev.mynewpet.ui.TextComponent
 import com.jamirodev.mynewpet.ui.TextFieldComponent
 import com.jamirodev.mynewpet.ui.TopBar
@@ -43,7 +44,7 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel) {
                 textSize = 18.sp
             )
             SpacerWithValue(value = 60)
-            TextComponent(textValue = "Nombre", textSize = 18.sp )
+            TextComponent(textValue = "Nombre", textSize = 18.sp)
             SpacerWithValue(value = 15)
             TextFieldComponent(onTextChanged = {
                 userInputViewModel.onEvent(
@@ -54,22 +55,36 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel) {
             TextComponent(textValue = "Qué te gusta", textSize = 18.sp)
 
             Row(modifier = Modifier.fillMaxWidth()) {
-                AnimalCard(image = R.drawable.perro, animalSelected = {
-                    userInputViewModel.onEvent(
-                        UserDataUiEvents.AnimalSelected(it)
-                    )
-                },
-                    selected = userInputViewModel.uiState.value.animalSelected == "Dog")
-                AnimalCard(image = R.drawable.feliz, animalSelected = {
-                    userInputViewModel.onEvent(
-                        UserDataUiEvents.AnimalSelected(it)
-                    )
-                },
-                    selected = userInputViewModel.uiState.value.animalSelected == "Cat")
+                AnimalCard(
+                    image = R.drawable.perro, animalSelected = {
+                        userInputViewModel.onEvent(
+                            UserDataUiEvents.AnimalSelected(it)
+                        )
+                    },
+                    selected = userInputViewModel.uiState.value.animalSelected == "Dog"
+                )
+                AnimalCard(
+                    image = R.drawable.feliz, animalSelected = {
+                        userInputViewModel.onEvent(
+                            UserDataUiEvents.AnimalSelected(it)
+                        )
+                    },
+                    selected = userInputViewModel.uiState.value.animalSelected == "Cat"
+                )
+            }
+            if (userInputViewModel.isValidState()) {
+
+                ButtonComponent(
+                    goToDetailScreen = {
+                        println("=====already done")
+                        println("=====${userInputViewModel.uiState.value.nameEntered} and ${userInputViewModel.uiState.value.animalSelected}")
+                    }
+                )
             }
         }
     }
 }
+
 @Composable
 fun SpacerWithValue(value: Int) {
     Spacer(modifier = Modifier.size(value.dp))

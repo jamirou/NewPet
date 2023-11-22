@@ -11,7 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jamirodev.mynewpet.data.UserDataUiEvents
 import com.jamirodev.mynewpet.ui.TextComponent
+import com.jamirodev.mynewpet.ui.TextFieldComponent
 import com.jamirodev.mynewpet.ui.TopBar
 import com.jamirodev.mynewpet.ui.UserInputViewModel
 
@@ -33,10 +35,15 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel) {
             )
             SpacerWithValue(value = 20)
             TextComponent(
-                textValue = "¡Esta aplicación preparará una página de detalles basada en lo que decidas tu!",
+                textValue = "¡Esta aplicación preparará una página basada en lo que escojas!",
                 textSize = 18.sp
             )
             SpacerWithValue(value = 60)
+            TextFieldComponent(onTextChanged = {
+                userInputViewModel.onEvent(
+                    UserDataUiEvents.UserNameEntered(it)
+                )
+            })
         }
     }
 }

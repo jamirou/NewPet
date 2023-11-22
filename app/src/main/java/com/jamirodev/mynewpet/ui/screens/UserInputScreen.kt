@@ -1,8 +1,10 @@
 package com.jamirodev.mynewpet.ui.screens
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Surface
@@ -11,7 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jamirodev.mynewpet.R
 import com.jamirodev.mynewpet.data.UserDataUiEvents
+import com.jamirodev.mynewpet.ui.AnimalCard
 import com.jamirodev.mynewpet.ui.TextComponent
 import com.jamirodev.mynewpet.ui.TextFieldComponent
 import com.jamirodev.mynewpet.ui.TopBar
@@ -28,7 +32,7 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel) {
                 .fillMaxSize()
                 .padding(18.dp)
         ) {
-            TopBar("Hello Android \uD83D\uDE0A")
+            TopBar("Hola Android \uD83D\uDE0A")
             TextComponent(
                 textValue = "Aprendamos algo de ti!",
                 textSize = 24.sp
@@ -39,11 +43,20 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel) {
                 textSize = 18.sp
             )
             SpacerWithValue(value = 60)
+            TextComponent(textValue = "Nombre", textSize = 18.sp )
+            SpacerWithValue(value = 15)
             TextFieldComponent(onTextChanged = {
                 userInputViewModel.onEvent(
                     UserDataUiEvents.UserNameEntered(it)
                 )
             })
+            SpacerWithValue(value = 25)
+            TextComponent(textValue = "Qué te gusta", textSize = 18.sp)
+
+            Row(modifier = Modifier.fillMaxWidth()) {
+                AnimalCard(image = R.drawable.perro)
+                AnimalCard(image = R.drawable.feliz)
+            }
         }
     }
 }

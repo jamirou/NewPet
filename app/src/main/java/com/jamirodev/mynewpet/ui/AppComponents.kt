@@ -4,9 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -104,14 +109,29 @@ fun TextFieldComponent(
     )
 }
 
+@Composable
+fun AnimalCard(image: Int) {
+    Card(
+        modifier = Modifier
+            .padding(24.dp)
+            .size(130.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Image(
+            modifier = Modifier
+                .padding(15.dp)
+                .wrapContentWidth()
+                .wrapContentHeight(),
+            painter = painterResource(id = image),
+            contentDescription = "Cat image"
+        )
+    }
+}
+
 //@Preview(showBackground = true)
 //@Composable
-//fun TextFieldComponentPreview() {
-//    TextFieldComponent()
+//fun AnimalCardPreview() {
+//    AnimalCard()
 //}
-//
-
-
-
 
 

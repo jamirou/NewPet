@@ -54,8 +54,18 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel) {
             TextComponent(textValue = "Qué te gusta", textSize = 18.sp)
 
             Row(modifier = Modifier.fillMaxWidth()) {
-                AnimalCard(image = R.drawable.perro)
-                AnimalCard(image = R.drawable.feliz)
+                AnimalCard(image = R.drawable.perro, animalSelected = {
+                    userInputViewModel.onEvent(
+                        UserDataUiEvents.AnimalSelected(it)
+                    )
+                },
+                    selected = userInputViewModel.uiState.value.animalSelected == "Dog")
+                AnimalCard(image = R.drawable.feliz, animalSelected = {
+                    userInputViewModel.onEvent(
+                        UserDataUiEvents.AnimalSelected(it)
+                    )
+                },
+                    selected = userInputViewModel.uiState.value.animalSelected == "Cat")
             }
         }
     }

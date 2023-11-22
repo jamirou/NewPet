@@ -6,6 +6,10 @@ import com.jamirodev.mynewpet.data.UserDataUiEvents
 import com.jamirodev.mynewpet.data.UserInputScreenState
 
 class UserInputViewModel : ViewModel() {
+
+    companion object {
+        const val TAG = "UserInputViewModel"
+    }
     var uiState = mutableStateOf(UserInputScreenState())
 
     fun onEvent(event: UserDataUiEvents) {

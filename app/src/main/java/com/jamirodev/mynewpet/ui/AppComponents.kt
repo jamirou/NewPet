@@ -1,13 +1,18 @@
 package com.jamirodev.mynewpet.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
@@ -37,14 +42,10 @@ import com.jamirodev.mynewpet.R
 @Composable
 fun TopBar(value: String) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+        modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = value,
-            color = Color.Black,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Medium
+            text = value, color = Color.Black, fontSize = 24.sp, fontWeight = FontWeight.Medium
         )
         Spacer(modifier = Modifier.weight(1f))
         Image(
@@ -64,15 +65,10 @@ fun TopBarPreview() {
 
 @Composable
 fun TextComponent(
-    textValue: String,
-    textSize: TextUnit,
-    colorValue: Color = Color.Black
+    textValue: String, textSize: TextUnit, colorValue: Color = Color.Black
 ) {
     Text(
-        text = textValue,
-        fontSize = textSize,
-        color = colorValue,
-        fontWeight = FontWeight.Light
+        text = textValue, fontSize = textSize, color = colorValue, fontWeight = FontWeight.Light
     )
 }
 
@@ -90,41 +86,48 @@ fun TextFieldComponent(
 ) {
     var currentValue by remember { mutableStateOf("") }
     val localFocusManager = LocalFocusManager.current
-    OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(),
-        value = currentValue,
-        onValueChange = {
-            currentValue = it
-            onTextChanged(it)
-        },
-        placeholder = {
-            Text(text = "Escribe tu nombre", fontSize = 18.sp)
-        }, textStyle = TextStyle.Default.copy(fontSize = 24.sp),
-        keyboardOptions = KeyboardOptions(
-            imeAction = ImeAction.Done
-        ),
-        keyboardActions = KeyboardActions {
-            localFocusManager.clearFocus()
-        }
-    )
+    OutlinedTextField(modifier = Modifier.fillMaxWidth(), value = currentValue, onValueChange = {
+        currentValue = it
+        onTextChanged(it)
+    }, placeholder = {
+        Text(text = "Escribe tu nombre", fontSize = 18.sp)
+    }, textStyle = TextStyle.Default.copy(fontSize = 24.sp), keyboardOptions = KeyboardOptions(
+        imeAction = ImeAction.Done
+    ), keyboardActions = KeyboardActions {
+        localFocusManager.clearFocus()
+    })
 }
 
 @Composable
-fun AnimalCard(image: Int) {
+fun AnimalCard(
+    image: Int, selected: Boolean, animalSelected: (animalName: String) -> Unit
+) {
     Card(
         modifier = Modifier
             .padding(24.dp)
             .size(130.dp),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
-        Image(
+        Box(
             modifier = Modifier
-                .padding(15.dp)
-                .wrapContentWidth()
-                .wrapContentHeight(),
-            painter = painterResource(id = image),
-            contentDescription = "Cat image"
-        )
+                .fillMaxSize()
+                .border(
+                    width = 1.dp,
+                    color = if (selected) Color.Green else Color.Transparent,
+                    shape = RoundedCornerShape(8.dp)
+                )
+        ) {
+            Image(
+                modifier = Modifier
+                    .padding(15.dp)
+                    .wrapContentWidth()
+                    .wrapContentHeight()
+                    .clickable {
+                        val animalName = if (image == R.drawable.feliz) "Cat" else "Dog"
+                        animalSelected(animalName)
+                    }, painter = painterResource(id = image), contentDescription = "Animal image"
+            )
+        }
     }
 }
 

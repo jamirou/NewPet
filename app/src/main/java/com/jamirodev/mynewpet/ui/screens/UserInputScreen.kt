@@ -75,11 +75,12 @@ fun UserInputScreen(
                     selected = userInputViewModel.uiState.value.animalSelected == "Cat"
                 )
             }
+            Spacer(modifier = Modifier.weight(1f))
             if (userInputViewModel.isValidState()) {
                 ButtonComponent(
                     goToDetailScreen = {
-                        println("=====already done")
-                        println("=====${userInputViewModel.uiState.value.nameEntered} and ${userInputViewModel.uiState.value.animalSelected}")
+//                        println("=====already done")
+//                        println("=====${userInputViewModel.uiState.value.nameEntered} and ${userInputViewModel.uiState.value.animalSelected}")
                         showWelcomeScreen(
                             Pair(
                                 userInputViewModel.uiState.value.nameEntered,

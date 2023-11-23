@@ -12,6 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.jamirodev.mynewpet.ui.CuriousFact
+import com.jamirodev.mynewpet.ui.FactsViewModel
 import com.jamirodev.mynewpet.ui.TextComponent
 import com.jamirodev.mynewpet.ui.TextWithShadow
 import com.jamirodev.mynewpet.ui.TopBar
@@ -27,10 +30,15 @@ fun WelcomeScreen(username: String?, animalSelected: String?) {
                 .padding(18.dp)
         ) {
             TopBar(value = "Hola $username! 🖖")
-            TextComponent(textValue = "Gracias por usar la aplicacion", textSize = 24.sp)
+            TextComponent(textValue = "（づ￣3￣）づ╭❤️～", textSize = 24.sp)
             SpacerWithValue(value = 60)
-            val dogOrCat = if (animalSelected == "Cat") "Eres CatLover 😸" else "Eres DogLover 🐶"
+            val dogOrCat = if (animalSelected == "Cat") "Dato curioso sobre gatos 😸" else "Dato curioso sobre perros 🐶"
             TextWithShadow(value = dogOrCat)
+
+            val factsViewModel : FactsViewModel = viewModel()
+            CuriousFact(
+                value = factsViewModel.generateRandomFact(animalSelected!!)
+            )
         }
     }
 }

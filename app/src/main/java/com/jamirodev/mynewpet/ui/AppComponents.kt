@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
@@ -42,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jamirodev.mynewpet.R
 import com.jamirodev.mynewpet.Utils
+import com.jamirodev.mynewpet.ui.screens.SpacerWithValue
 
 @Composable
 fun TopBar(value: String) {
@@ -164,3 +167,44 @@ fun TextWithShadow(value: String) {
         )
     )
 }
+
+
+@Composable
+fun CuriousFact(value: String) {
+    Card(
+        modifier = Modifier
+            .padding(32.dp)
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(8.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(18.dp, 24.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.quotes),
+                contentDescription = "quote",
+                modifier = Modifier
+                    .rotate(180f)
+                    .size(20.dp)
+            )
+            SpacerWithValue(value = 24)
+            TextWithShadow(value = value)
+            SpacerWithValue(value = 24)
+            Image(
+                painter = painterResource(id = R.drawable.quotes),
+                contentDescription = "quote",
+                modifier = Modifier.size(20.dp)
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun CuriousFactPreview() {
+    CuriousFact(value = "JJAJAJA")
+}
+
+
+

@@ -23,7 +23,10 @@ import com.jamirodev.mynewpet.ui.TopBar
 import com.jamirodev.mynewpet.ui.UserInputViewModel
 
 @Composable
-fun UserInputScreen(userInputViewModel: UserInputViewModel) {
+fun UserInputScreen(
+    userInputViewModel: UserInputViewModel,
+    showWelcomeScreen: (valuesPair: Pair<String, String>) -> Unit
+) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -73,11 +76,16 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel) {
                 )
             }
             if (userInputViewModel.isValidState()) {
-
                 ButtonComponent(
                     goToDetailScreen = {
                         println("=====already done")
                         println("=====${userInputViewModel.uiState.value.nameEntered} and ${userInputViewModel.uiState.value.animalSelected}")
+                        showWelcomeScreen(
+                            Pair(
+                                userInputViewModel.uiState.value.nameEntered,
+                                userInputViewModel.uiState.value.animalSelected
+                            )
+                        )
                     }
                 )
             }
@@ -89,9 +97,9 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel) {
 fun SpacerWithValue(value: Int) {
     Spacer(modifier = Modifier.size(value.dp))
 }
-
-@Preview
-@Composable
-fun UserInputScreenPreview() {
-    UserInputScreen(UserInputViewModel())
-}
+//
+//@Preview
+//@Composable
+//fun UserInputScreenPreview() {
+//    UserInputScreen(UserInputViewModel(), showWelcomeScreen = "welcome")
+//}

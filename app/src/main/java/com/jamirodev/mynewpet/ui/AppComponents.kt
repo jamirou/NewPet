@@ -28,7 +28,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -39,6 +41,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jamirodev.mynewpet.R
+import com.jamirodev.mynewpet.Utils
 
 @Composable
 fun TopBar(value: String) {
@@ -149,3 +152,15 @@ fun ButtonComponent(
     }
 }
 
+@Composable
+fun TextWithShadow(value: String) {
+    val shadowOffset = Offset(x = 1f, y = 2f)
+    Text(
+        text = value,
+        fontSize = 24.sp,
+        fontWeight = FontWeight.Light,
+        style = TextStyle(
+            shadow = Shadow(Utils.generateRandomColor(), shadowOffset, 2f)
+        )
+    )
+}

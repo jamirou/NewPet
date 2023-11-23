@@ -11,6 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.jamirodev.mynewpet.ui.TextComponent
+import com.jamirodev.mynewpet.ui.TextWithShadow
 import com.jamirodev.mynewpet.ui.TopBar
 
 @Composable
@@ -24,6 +27,10 @@ fun WelcomeScreen(username: String?, animalSelected: String?) {
                 .padding(18.dp)
         ) {
             TopBar(value = "Hola $username! 🖖")
+            TextComponent(textValue = "Gracias por usar la aplicacion", textSize = 24.sp)
+            SpacerWithValue(value = 60)
+            val dogOrCat = if (animalSelected == "Cat") "Eres CatLover 😸" else "Eres DogLover 🐶"
+            TextWithShadow(value = dogOrCat)
         }
     }
 }

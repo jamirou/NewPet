@@ -33,5 +33,3 @@ Higher-order functions are leveraged to promote code reusability and maintainabi
 
 The inclusion of the Row layout inside the USER_INPUT_SCREEN demonstrates the effective use of composables to create dynamic and responsive user interfaces.
 
-## Project Structure
-
